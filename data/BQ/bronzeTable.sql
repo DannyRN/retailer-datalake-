@@ -5,9 +5,11 @@ CREATE EXTERNAL TABLE IF NOT EXISTS `avd-databricks-demo.bronze_dataset.orders`(
     total_amount FLOAT64,
     updated_at STRING
 )
+    
 OPTIONS (
   format = 'JSON',
   uris = ['gs://retailer-datalake-project-27032025/landing/retailer-db/orders/*.json']
+    
 );
 
 CREATE EXTERNAL TABLE IF NOT EXISTS `avd-databricks-demo.bronze_dataset.customers`
@@ -46,6 +48,10 @@ OPTIONS (
     uris = ['gs://retailer-datalake-project-27032025/landing/retailer-db/categories/*.json']
 );
 
+
+
+
+
 CREATE EXTERNAL TABLE IF NOT EXISTS `avd-databricks-demo.bronze_dataset.order_items`
 (
     order_item_id INT64,
@@ -55,10 +61,17 @@ CREATE EXTERNAL TABLE IF NOT EXISTS `avd-databricks-demo.bronze_dataset.order_it
     price FLOAT64,
     updated_at STRING
 )
+
+
+    
+    
 OPTIONS (
     format = 'JSON',
     uris = ['gs://retailer-datalake-project-27032025/landing/retailer-db/order_items/*.json']
 );
+
+
+
 -------------------------------------------------------------------------------------------------------------
 -- Suppliers Table
 CREATE EXTERNAL TABLE IF NOT EXISTS `avd-databricks-demo.bronze_dataset.suppliers` (
