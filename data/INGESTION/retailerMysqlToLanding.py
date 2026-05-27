@@ -8,23 +8,23 @@ import json
 spark = SparkSession.builder.appName("RetailerMySQLToLanding").getOrCreate()
 
 # Google Cloud Storage (GCS) Configuration variables
-GCS_BUCKET = "retailer-datalake-project-27032025"
+GCS_BUCKET = "datalake-project-bkt-24052026"
 LANDING_PATH = f"gs://{GCS_BUCKET}/landing/retailer-db/"
 ARCHIVE_PATH = f"gs://{GCS_BUCKET}/landing/retailer-db/archive/"
 CONFIG_FILE_PATH = f"gs://{GCS_BUCKET}/configs/retailer_config.csv"
 
 # BigQuery Configuration
-BQ_PROJECT = "avd-databricks-demo"
+BQ_PROJECT = "divine-clone-493314-b4"
 BQ_AUDIT_TABLE = f"{BQ_PROJECT}.temp_dataset.audit_log"
 BQ_LOG_TABLE = f"{BQ_PROJECT}.temp_dataset.pipeline_logs"
 BQ_TEMP_PATH = f"{GCS_BUCKET}/temp/"  
 
 # MySQL Configuration
 MYSQL_CONFIG = {
-    "url": "jdbc:mysql://34.132.173.221:3306/retailerDB?useSSL=false&allowPublicKeyRetrieval=true",
+    "url": "jdbc:mysql://34.123.44.94:3306/retailerDB",
     "driver": "com.mysql.cj.jdbc.Driver",
     "user": "myuser",
-    "password": "mypass"
+    "password": "Dannyrn@1311"
 }
 
 # Initialize GCS & BigQuery Clients
@@ -162,7 +162,8 @@ def extract_and_save_to_landing(table, load_type, watermark_col):
         
         # Insert Audit Entry
         audit_df = spark.createDataFrame([
-            (table, load_type, df.count(), datetime.datetime.now(), "SUCCESS")], ["tablename", "load_type", "record_count", "load_timestamp", "status"])
+            (table, load_type, df.count(), datetime.datetime.now(), "SUCCESS")], 
+            ["tablename", "load_type", "record_count", "load_timestamp", "status"])
 
         (audit_df.write.format("bigquery")
             .option("table", BQ_AUDIT_TABLE)
